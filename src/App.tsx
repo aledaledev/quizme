@@ -1,21 +1,41 @@
 import { useState } from 'react'
 import QuestionCard from './components/QuestionCard'
-import { fetchQuestions, Difficulty } from './service/api'
+import { fetchQuestions, Difficulty, QuestionState } from './service/api'
+
+type AnswerObject = {
+  question: string;
+  answer: string;
+  correct :boolean;
+  correctAnswer: string;
+}
 
 const TOTAL_QUESTIONS = 10
 
 function App() {
 
   const [loading, setLoading] = useState(false)
-  const [questions, setQuestions] = useState([])
-  const [number, seNumber] = useState(0)
-  const [userAnswer, setUserAnswers] = useState([])
+  const [questions, setQuestions] = useState<QuestionState[]>([])
+  const [number, setNumber] = useState(0)
+  const [userAnswer, setUserAnswers] = useState<AnswerObject[]>([])
   const [score, setScore] = useState(0)
-  const [gameOver, setGameOver] = useState(false)
+  const [gameOver, setGameOver] = useState(true)
 
-  console.log(fetchQuestions(10,Difficulty.EASY));
+  //console.log(fetchQuestions(10,Difficulty.EASY));
+  console.log(questions);
 
-  const startTrivia = () => {}
+  const startTrivia = async () => {
+    setLoading(true)
+    setGameOver(false)
+    const newQuestions = await fetchQuestions(
+      TOTAL_QUESTIONS,
+      Difficulty.EASY
+    )
+    setQuestions(newQuestions)
+    setScore(0)
+    setUserAnswers([])
+    setNumber(0)
+    setLoading(false)
+  }
 
   const checkAnswer = (e:React.MouseEvent<HTMLButtonElement>) => {}
 
