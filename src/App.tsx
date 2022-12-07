@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import QuestionCard from './components/QuestionCard'
+import { fetchQuestions, Difficulty } from './service/api'
 
 const TOTAL_QUESTIONS = 10
 
@@ -11,6 +12,8 @@ function App() {
   const [userAnswer, setUserAnswers] = useState([])
   const [score, setScore] = useState(0)
   const [gameOver, setGameOver] = useState(false)
+
+  console.log(fetchQuestions(10,Difficulty.EASY));
 
   const startTrivia = () => {}
 
@@ -27,14 +30,14 @@ function App() {
       <button onClick={startTrivia}>Start</button>
       <p>score: </p>
       <p>Loading Quiz...</p>
-      <QuestionCard
+      {/*<QuestionCard
         questionNr={number + 1}
         totalQuestions={TOTAL_QUESTIONS}
         question={questions[number].question}
         answers={questions[number].answer}
         userAnswer={userAnswer?userAnswer[number]:undefined}
         callback={checkAnswer}
-      />
+      />*/}
       <button onClick={nextQuestion}>Next question</button>
     </div>
   )
