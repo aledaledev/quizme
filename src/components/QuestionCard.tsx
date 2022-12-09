@@ -1,5 +1,6 @@
 import React from 'react'
 import { AnswerObject } from '../App'
+import {CardWrapper } from './QuestionCard.styles'
 
 type Props = {
     question: string,
@@ -13,13 +14,13 @@ type Props = {
 //react functional component
 const QuestionCard:React.FC<Props> = ({question,answers,callback,userAnswer,questionNr,totalQuestions}) => {
   return (
-    <div>
-        <p>Question: {questionNr} of {totalQuestions}</p>
+    <CardWrapper>
+        <p>Question: <span>{questionNr}</span> of <span>{totalQuestions}</span></p>
         <h2 dangerouslySetInnerHTML={{__html: question}}/>
-        <div>
+        <div className='grid'>
           {answers.map(answer => {
             return (
-                <div key={answer}>
+                <div key={answer} className='option'>
                     <button value={answer} disabled={Boolean(userAnswer)} onClick={callback}>
                         <span dangerouslySetInnerHTML={{__html:answer}}/>
                     </button>
@@ -27,7 +28,7 @@ const QuestionCard:React.FC<Props> = ({question,answers,callback,userAnswer,ques
             )
           })}
         </div>
-    </div>
+    </CardWrapper >
   )
 }
 

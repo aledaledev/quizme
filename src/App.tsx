@@ -1,12 +1,14 @@
 import { useState } from 'react'
 import QuestionCard from './components/QuestionCard'
 import { fetchQuestions, Difficulty, QuestionState } from './service/api'
+import {GlobalStyle, Wrapper} from './App.styles'
+import { MoonLoader } from 'react-spinners'
 
 export type AnswerObject = {
   question: string;
   answer: string;
   correct :boolean;
-  correctAnswer: string;
+  correctAnswer: string; 
 }
 
 const TOTAL_QUESTIONS = 10
@@ -20,8 +22,6 @@ function App() {
   const [score, setScore] = useState(0)
   const [gameOver, setGameOver] = useState(true)
 
-  //console.log(fetchQuestions(10,Difficulty.EASY));
-
   const startTrivia = async () => {
     setLoading(true)
     setGameOver(false)
@@ -29,7 +29,6 @@ function App() {
       TOTAL_QUESTIONS,
       Difficulty.EASY
       )
-      console.log(newQuestions);
     setQuestions(newQuestions)
     setScore(0)
     setUserAnswers([])
@@ -61,16 +60,17 @@ function App() {
     }
   }
 
-  //font-family: 'Poppins', sans-serif;
-  //https://opentdb.com/api.php?amount=10&category=9&difficulty=medium&type=multiple
-
   return (
-    <div>
-      <h1>Quizme time!</h1> 
+    <>
+    <GlobalStyle/>
+    <Wrapper>
+      <h1>Quizme!</h1> 
       {gameOver || userAnswers.length === TOTAL_QUESTIONS?
-      <button onClick={startTrivia}>Start</button>:null}
-      {!gameOver?<p>score: {score}</p>:null} 
+      <button className='start' onClick={startTrivia}>Start</button>:null}
+      
       {!loading && !gameOver?
+      <>
+      <p className='score'>score: {score}</p>
       <QuestionCard
         questionNr={number + 1}
         totalQuestions={TOTAL_QUESTIONS}
@@ -79,12 +79,20 @@ function App() {
         userAnswer={userAnswers?userAnswers[number]:undefined}
         callback={checkAnswer}
       />
+      </>
       :null
       }
       {!loading && !gameOver && userAnswers.length === number + 1 && number !== TOTAL_QUESTIONS - 1? 
-      <button onClick={nextQuestion}>Next question</button>:null}
-      {loading?<p>Loading Quiz...</p>:null}
-    </div>
+      <button className='next' onClick={nextQuestion}>Next question</button>:null}
+      {loading?<MoonLoader
+        className='spinner'
+        color="#cfa6db"
+        loading
+        size={70}
+        speedMultiplier={0.8}
+        />:null}
+    </Wrapper>
+    </>
   )
 }
 
