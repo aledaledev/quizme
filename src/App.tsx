@@ -2,6 +2,7 @@ import QuestionCard from './components/QuestionCard'
 import {GlobalStyle, Wrapper} from './App.styles'
 import { MoonLoader } from 'react-spinners'
 import { useQuiz } from './context/QuizContext'
+import ResultTable from './components/ResultTable'
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
         size={70}
         speedMultiplier={0.8}
         />:null}
+        <ResultTable/>
     </Wrapper>
     </>
   )
