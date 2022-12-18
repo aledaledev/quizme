@@ -1,15 +1,6 @@
 import React from 'react'
-import { AnswerObject } from '../App'
+import { Props } from '../types'
 import {CardWrapper } from './QuestionCard.styles'
-
-type Props = {
-    question: string,
-    answers: string[],
-    callback: (e:React.MouseEvent<HTMLButtonElement>)=> void,
-    userAnswer: AnswerObject | undefined,
-    questionNr: number,
-    totalQuestions: number 
-}
 
 //react functional component
 const QuestionCard:React.FC<Props> = ({question,answers,callback,userAnswer,questionNr,totalQuestions}) => {
