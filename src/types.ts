@@ -40,5 +40,12 @@ export type QuizProviderProps = {
 export type QuizContextType = {
     startTrivia: () => void,
     checkAnswer: (e:React.MouseEvent<HTMLButtonElement>) => void,
-    nextQuestion: () => void
+    nextQuestion: () => void,
+    loading: boolean, 
+    number: number, 
+    questions: QuestionState[], 
+    userAnswers:AnswerObject[],
+    score:number, 
+    gameOver:boolean, 
+    TOTAL_QUESTIONS:number
 }

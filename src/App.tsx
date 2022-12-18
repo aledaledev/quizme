@@ -5,7 +5,7 @@ import { useQuiz } from './context/QuizContext'
 
 function App() {
 
-  const {} = useQuiz()
+  const {gameOver, userAnswers, TOTAL_QUESTIONS, startTrivia, loading, checkAnswer, nextQuestion,number, score, questions} = useQuiz()
 
   return (
     <>

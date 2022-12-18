@@ -2,9 +2,9 @@ import { createContext, useContext, useState } from "react";
 import { fetchQuestions } from "../services/api";
 import { AnswerObject, Difficulty, QuestionState, QuizContextType, QuizProviderProps } from "../types";
 
-const QuizContext = createContext({} as QuizContextType)
-
 const TOTAL_QUESTIONS = 10
+
+const QuizContext = createContext({} as QuizContextType)
 
 export function useQuiz () {
     return useContext(QuizContext)
@@ -58,7 +58,7 @@ export function QuizProvider ({children}:QuizProviderProps){
     }
   }
 
-    return <QuizContext.Provider value={{startTrivia, checkAnswer, nextQuestion, loading, number, userAnswers, score, gameOver, TOTAL_QUESTIONS}}>
+    return <QuizContext.Provider value={{startTrivia, checkAnswer, nextQuestion, loading, number, userAnswers, score, gameOver, TOTAL_QUESTIONS, questions}}>
         {children}
     </QuizContext.Provider>
 }
