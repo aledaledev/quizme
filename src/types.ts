@@ -13,7 +13,8 @@ export type Props = {
     callback: (e:React.MouseEvent<HTMLButtonElement>)=> void,
     userAnswer: AnswerObject | undefined,
     questionNr: number,
-    totalQuestions: number 
+    totalQuestions: number,
+    correctAnswer:string
 }
 
 export enum Difficulty {

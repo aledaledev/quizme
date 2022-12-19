@@ -13,13 +13,11 @@ function App() {
     <GlobalStyle/>
     <Wrapper>
       <h1>Quizme!</h1> 
-      {gameOver || userAnswers.length === TOTAL_QUESTIONS?
-      <button className='start' onClick={startTrivia}>Start</button>:null}
-      
-      {!loading && !gameOver?
+      {!loading && !gameOver && userAnswers.length < TOTAL_QUESTIONS?
       <>
       <p className='score'>score: {score}</p>
       <QuestionCard
+        correctAnswer={questions[number].correct_answer}
         questionNr={number + 1}
         totalQuestions={TOTAL_QUESTIONS}
         question={questions[number].question}
@@ -39,7 +37,9 @@ function App() {
         size={70}
         speedMultiplier={0.8}
         />:null}
-        <ResultTable/>
+      {!gameOver && userAnswers.length===TOTAL_QUESTIONS?<ResultTable/>:null}
+      {gameOver || userAnswers.length === TOTAL_QUESTIONS?
+      <button className='start' onClick={startTrivia}>{userAnswers.length === TOTAL_QUESTIONS?'Try again':'Start'}</button>:null}
     </Wrapper>
     </>
   )
